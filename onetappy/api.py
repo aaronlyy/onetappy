@@ -7,7 +7,8 @@
 import requests
 
 # TODO:
-# add methods: 
+# add methods
+# add docstrings to every method
 
 # region base class
 class Onetappy:
@@ -39,7 +40,7 @@ class Onetappy:
 
 # region configs
     def get_configs(self):
-        """Gets all configs
+        """Gets all configs.
         """
         endpoint = "configs/"
         res = self._req(endpoint, "GET")
@@ -49,8 +50,8 @@ class Onetappy:
         """Creates a new config.
 
         Args:
-            name (str): Name of the config
-            data (str): Config content data
+            name (str): Name of the config.
+            data (str): Config content data.
         """
         pass
 
@@ -58,7 +59,7 @@ class Onetappy:
         """Gets a specific config.
 
         Args:
-            config_id (str): ID of the config
+            config_id (str): ID of the config.
         """
         endpoint = f"configs/{config_id}"
         res = self._req(endpoint, "GET")
@@ -85,71 +86,167 @@ class Onetappy:
 
 # region config invites
     def get_config_invites(self):
+        """Gets all config invites.
+        """
         pass
 
     def get_config_invite(self, config_id:int):
+        """Gets all invites for a specific config.
+
+        Args:
+            config_id (int): ID of config
+        """
         pass
 
     def create_config_invite(self, config_id:int, max_age:int, max_uses:int):
+        """Creates a new config invite.
+
+        Args:
+            config_id (int): ID of config
+            max_age (int): Maximum age. 1 = 1h, 2 = 3h, 3 = 6h, 4 = 12h, 5 = 24h, 6 = 48h
+            max_uses (int): Maximum uses. 1 = 1, 2 = 5, 3 = 10, 4 = 25, 5 = 50, 6 = 100
+        """
         pass
 
     def delete_config_invite(self, config_id:int, invite_id:int):
+        """Deletes a config invite.
+
+        Args:
+            config_id (int): ID of config.
+            invite_id (int): ID of the config invite to delete.
+        """
         pass
 # endregion
 
 # region config subscription
     def get_all_config_subs(self):
+        """Gets all config subscriptions.
+        """
         pass
 
     def get_config_subs(self, config_id:int):
+        """Gets all subscriptions for a specific config.
+
+        Args:
+            config_id (int): ID of config.
+        """
         pass
 
     def create_config_sub(self, config_id:int, user_id:int):
+        """Creates a new config subscription.
+
+        Args:
+            config_id (int): ID of config.
+            user_id (int): ID of the user to share the config with.
+        """
         pass
 
     def delete_config_sub(self, config_id:int, user_id:int):
+        """Deletes a config subscription.
+
+        Args:
+            config_id (int): ID of config.
+            user_id (int):  ID of the user to stop sharing the config with.
+        """
         pass
 # endregion
 
 # region scripts
     def get_scripts(self):
+        """Gets all scripts.
+        """
         pass
     
     def get_script(self, script_id:int):
+        """Gets a specific script.
+
+        Args:
+            script_id (int): ID of script.
+        """
         pass
 
     def update_script(self, script_id:int, name:str):
+        """Updates an existing script.
+
+        Args:
+            script_id (int): ID of script.
+            name (str): Name of the script.
+        """
         pass
 
     def delete_script(self, script_id:int):
+        """Deletes an existing script.
+
+        Args:
+            script_id (int): ID of script.
+        """
         pass
 # endregion
 
 # region script invite
     def get_all_script_invites(self):
+        """Gets all script invites.
+        """
         pass
 
     def get_script_invites(self, script_id:int):
+        """Gets all invites for a specific script.
+
+        Args:
+            script_id (int): ID of script.
+        """
         pass
 
     def create_script_invite(self, script_id:int, max_age:int, max_uses:int):
+        """Creates a new script invite.
+
+        Args:
+            script_id (int): ID of script.
+            max_age (int): Maximum age. 1 = 1h, 2 = 3h, 3 = 6h, 4 = 12h, 5 = 24h, 6 = 48h
+            max_uses (int): Maximum uses. 1 = 1, 2 = 5, 3 = 10, 4 = 25, 5 = 50, 6 = 100
+        """
         pass
 
     def delete_script_invite(self, script_id:int, invite_id:int):
+        """Deletes a config invite.
+
+        Args:
+            script_id (int): ID of script.
+            invite_id (int): ID of the config to delete.
+        """
         pass
 # endregion
 
 # region script subscriptions
     def get_all_script_subs(self):
+        """Gets all config subscriptions.
+        """
         pass
     
     def get_script_subs(self, script_id:int):
+        """Gets all subscriptions for a specific config.
+
+        Args:
+            script_id (int): ID of script.
+        """
         pass
 
     def create_script_sub(self, script_id:int, user_id:int):
+        """Creates a new config subscription.
+
+        Args:
+            script_id (int): ID of script.
+            user_id (int): ID of the user to share the script with.
+        """
         pass
 
     def delete_script_sub(self, script_id:int, user_id:int):
+        """Deletes a script subscription.
+
+        Args:
+            script_id (int): ID of script.
+            user_id (int): ID of the user to stop sharing the script with.
+        """
         pass
 # endregion
 
