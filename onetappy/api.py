@@ -32,7 +32,10 @@ class Onetappy:
         elif method == "POST":
             return requests.post(url, headers=self._headers, data=data).json()
         elif method == "DELETE":
-            pass
+            if data:
+                return requests.delete(url, headers=self._headers, data=data).json()
+            else:
+                return requests.delete(url, headers=self._headers).json()
         else:
             raise Exception
 # endregion
@@ -42,8 +45,7 @@ class Onetappy:
         """Gets all configs.
         """
         endpoint = "configs/"
-        res = self._req("GET", endpoint)
-        return res
+        return self._req("GET", endpoint)
 
     def create_config(self, name:str, data:str):
         """Creates a new config.
@@ -57,8 +59,7 @@ class Onetappy:
             "name": name,
             "data": data
         }
-        res = self._req("POST", endpoint, data=d)
-        return res
+        return self._req("POST", endpoint, data=d)
 
     def get_config(self, config_id:str):
         """Gets a specific config.
@@ -67,8 +68,7 @@ class Onetappy:
             config_id (str): ID of the config.
         """
         endpoint = f"configs/{config_id}"
-        res = self._req("GET", endpoint)
-        return res
+        return self._req("GET", endpoint)
 
     def update_config(self, config_id:int, name:str, data:str):
         """Updates an existing config.
@@ -83,8 +83,7 @@ class Onetappy:
             "name": name,
             "data": data
         }
-        res = self._req("POST", endpoint, data=d)
-        return res
+        return self._req("POST", endpoint, data=d)
 
     def delete_config(self, config_id:int):
         """Deletes an existing config.
@@ -93,23 +92,24 @@ class Onetappy:
             config_id (int): ID of the config
         """
         endpoint = f"configs/{config_id}"
-        res = self._req("DELETE", endpoint)
-        return res
+        return self._req("DELETE", endpoint)
 # endregion
 
 # region config invites
     def get_all_config_invites(self):
         """Gets all config invites.
         """
-        pass
+        endpoint = f"configs/invites"
+        return self._req("GET", endpoint)
 
-    def get_config_invite(self, config_id:int):
+    def get_config_invites(self, config_id:int):
         """Gets all invites for a specific config.
 
         Args:
             config_id (int): ID of config
         """
-        pass
+        endpoint = f"configs/{config_id}/invites"
+        return self._req("GET", endpoint)
 
     def create_config_invite(self, config_id:int, max_age:int, max_uses:int):
         """Creates a new config invite.
@@ -119,7 +119,12 @@ class Onetappy:
             max_age (int): Maximum age. 1 = 1h, 2 = 3h, 3 = 6h, 4 = 12h, 5 = 24h, 6 = 48h
             max_uses (int): Maximum uses. 1 = 1, 2 = 5, 3 = 10, 4 = 25, 5 = 50, 6 = 100
         """
-        pass
+        endpoint = f"configs/{config_id}/invites"
+        d = {
+            "max_age": max_age,
+            "max_uses": max_uses
+        }
+        return self._req("POST", endpoint, data=d)
 
     def delete_config_invite(self, config_id:int, invite_id:int):
         """Deletes a config invite.
@@ -128,7 +133,11 @@ class Onetappy:
             config_id (int): ID of config.
             invite_id (int): ID of the config invite to delete.
         """
-        pass
+        endpoint = f"configs/{config_id}/invites"
+        d = {
+            "invite_id": invite_id
+        }
+        return self._req("DELETE", endpoint, data=d)
 # endregion
 
 # region config subscription
@@ -267,4 +276,6 @@ class Onetappy:
 
 
 if __name__ == "__main__":
-    ot = Onetappy("f3ac772a5592258e08bb6b0795943fb7", "3778fa10e12aeac2e92ddaaedf5161be54d5139c58184ea35ab50af3705a3b8d", "MQn8mslT1d2CoNMhdDC2SV5DjSYxykV9")
+    ot = Onetappy("445a9df3f8b625bfedefb3db7bd1d1b9", "f25428bf0834213ac17be0cd2ef9b0cb491db89bbf4e5ecdb55d8e3e1d9758c0", "QO-V8Kmc1ig7UmUCKQx7yUpEXyuKWBjU")
+    r = ot.get_all_config_invites()
+    print(r)
