@@ -273,9 +273,3 @@ class Onetappy:
 # endregion
 
 # endregion
-
-
-if __name__ == "__main__":
-    ot = Onetappy("445a9df3f8b625bfedefb3db7bd1d1b9", "f25428bf0834213ac17be0cd2ef9b0cb491db89bbf4e5ecdb55d8e3e1d9758c0", "QO-V8Kmc1ig7UmUCKQx7yUpEXyuKWBjU")
-    r = ot.get_all_config_invites()
-    print(r)
