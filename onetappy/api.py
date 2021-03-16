@@ -8,7 +8,6 @@ import requests
 
 # TODO:
 # add methods
-# add docstrings to every method
 
 # region base class
 class Onetappy:
@@ -25,13 +24,13 @@ class Onetappy:
         self._base_url = "https://api.onetap.com/cloud/"
 
 # region base request method
-    def _req(self, endpoint:str, method:str, data:dict=None):
+    def _req(self, method:str, endpoint:str, data:dict=None):
         url = f"{self._base_url}{endpoint}"
 
         if method == "GET":
-            return requests.get(url, headers=self._headers)
+            return requests.get(url, headers=self._headers).json()
         elif method == "POST":
-            return requests.post(url, headers=self._headers, data=data)
+            return requests.post(url, headers=self._headers, data=data).json()
         elif method == "DELETE":
             pass
         else:
@@ -39,12 +38,12 @@ class Onetappy:
 # endregion
 
 # region configs
-    def get_configs(self):
+    def get_all_configs(self):
         """Gets all configs.
         """
         endpoint = "configs/"
-        res = self._req(endpoint, "GET")
-        return OnetappyResponse(res)
+        res = self._req("GET", endpoint)
+        return res
 
     def create_config(self, name:str, data:str):
         """Creates a new config.
@@ -53,7 +52,13 @@ class Onetappy:
             name (str): Name of the config.
             data (str): Config content data.
         """
-        pass
+        endpoint = f"configs/"
+        d = {
+            "name": name,
+            "data": data
+        }
+        res = self._req("POST", endpoint, data=d)
+        return res
 
     def get_config(self, config_id:str):
         """Gets a specific config.
@@ -62,8 +67,8 @@ class Onetappy:
             config_id (str): ID of the config.
         """
         endpoint = f"configs/{config_id}"
-        res = self._req(endpoint, "GET")
-        return OnetappyResponse(res)
+        res = self._req("GET", endpoint)
+        return res
 
     def update_config(self, config_id:int, name:str, data:str):
         """Updates an existing config.
@@ -73,19 +78,27 @@ class Onetappy:
             name (str): Name of the config
             data (str): Config content data
         """
-        pass
+        endpoint = f"configs/{config_id}"
+        d = {
+            "name": name,
+            "data": data
+        }
+        res = self._req("POST", endpoint, data=d)
+        return res
 
     def delete_config(self, config_id:int):
         """Deletes an existing config.
 
         Args:
-            config_id (int): ID of teh config
+            config_id (int): ID of the config
         """
-        pass
+        endpoint = f"configs/{config_id}"
+        res = self._req("DELETE", endpoint)
+        return res
 # endregion
 
 # region config invites
-    def get_config_invites(self):
+    def get_all_config_invites(self):
         """Gets all config invites.
         """
         pass
@@ -152,7 +165,7 @@ class Onetappy:
 # endregion
 
 # region scripts
-    def get_scripts(self):
+    def get_all_scripts(self):
         """Gets all scripts.
         """
         pass
@@ -252,17 +265,6 @@ class Onetappy:
 
 # endregion
 
-# region response class
-class OnetappyResponse:
-    def __init__(self, res):
-        self._json = res.json()
 
-    def json(self):
-        return self._json
-
-    def __getattr__(self, attr):
-        if attr in self._json:
-            return attr
-        else:
-            return None
-# endregion
+if __name__ == "__main__":
+    ot = Onetappy("f3ac772a5592258e08bb6b0795943fb7", "3778fa10e12aeac2e92ddaaedf5161be54d5139c58184ea35ab50af3705a3b8d", "MQn8mslT1d2CoNMhdDC2SV5DjSYxykV9")
