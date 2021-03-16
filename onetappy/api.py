@@ -39,11 +39,20 @@ class Onetappy:
 
 # region configs
     def get_configs(self):
-        """Gets all available configs
+        """Gets all configs
         """
         endpoint = "configs/"
         res = self._req(endpoint, "GET")
         return OnetappyResponse(res)
+
+    def create_config(self, name:str, data:str):
+        """Creates a new config.
+
+        Args:
+            name (str): Name of the config
+            data (str): Config content data
+        """
+        pass
 
     def get_config(self, config_id:str):
         """Gets a specific config.
@@ -55,13 +64,22 @@ class Onetappy:
         res = self._req(endpoint, "GET")
         return OnetappyResponse(res)
 
-    def create_config(self, name, data:str):
+    def update_config(self, config_id:int, name:str, data:str):
+        """Updates an existing config.
+
+        Args:
+            config_id (int): ID of the config
+            name (str): Name of the config
+            data (str): Config content data
+        """
         pass
 
-    def update_config(self, config_id, name:str, data:str):
-        pass
+    def delete_config(self, config_id:int):
+        """Deletes an existing config.
 
-    def delete_config(self, config_id):
+        Args:
+            config_id (int): ID of teh config
+        """
         pass
 # endregion
 
@@ -69,13 +87,13 @@ class Onetappy:
     def get_config_invites(self):
         pass
 
-    def get_config_invite(self, config_id):
+    def get_config_invite(self, config_id:int):
         pass
 
-    def create_config_invite(self, config_id, max_age:int, max_uses:int):
+    def create_config_invite(self, config_id:int, max_age:int, max_uses:int):
         pass
 
-    def delete_config_invite(self, config_id, invite_id:int):
+    def delete_config_invite(self, config_id:int, invite_id:int):
         pass
 # endregion
 
@@ -83,13 +101,13 @@ class Onetappy:
     def get_all_config_subs(self):
         pass
 
-    def get_config_subs(self, config_id):
+    def get_config_subs(self, config_id:int):
         pass
 
-    def create_config_sub(self, config_id, user_id:int):
+    def create_config_sub(self, config_id:int, user_id:int):
         pass
 
-    def delete_config_sub(self, config_id, user_id:int):
+    def delete_config_sub(self, config_id:int, user_id:int):
         pass
 # endregion
 
@@ -97,13 +115,13 @@ class Onetappy:
     def get_scripts(self):
         pass
     
-    def get_script(self, script_id):
+    def get_script(self, script_id:int):
         pass
 
-    def update_script(self, script_id, name:str):
+    def update_script(self, script_id:int, name:str):
         pass
 
-    def delete_script(self, script_id):
+    def delete_script(self, script_id:int):
         pass
 # endregion
 
@@ -111,13 +129,13 @@ class Onetappy:
     def get_all_script_invites(self):
         pass
 
-    def get_script_invites(self, script_id):
+    def get_script_invites(self, script_id:int):
         pass
 
-    def create_script_invite(self, script_id, max_age:int, max_uses:int):
+    def create_script_invite(self, script_id:int, max_age:int, max_uses:int):
         pass
 
-    def delete_script_invite(self, script_id, invite_id:int):
+    def delete_script_invite(self, script_id:int, invite_id:int):
         pass
 # endregion
 
@@ -125,13 +143,13 @@ class Onetappy:
     def get_all_script_subs(self):
         pass
     
-    def get_script_subs(self, script_id):
+    def get_script_subs(self, script_id:int):
         pass
 
-    def create_script_sub(self, script_id, user_id:int):
+    def create_script_sub(self, script_id:int, user_id:int):
         pass
 
-    def delete_script_sub(self, script_id, user_id:int):
+    def delete_script_sub(self, script_id:int, user_id:int):
         pass
 # endregion
 
