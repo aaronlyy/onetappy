@@ -271,7 +271,8 @@ class Onetappy:
     def get_all_script_subs(self):
         """Gets all config subscriptions.
         """
-        pass
+        endpoint = f"/scripts/subscriptions/"
+        return self._req("GET", endpoint)
     
     def get_script_subs(self, script_id:int):
         """Gets all subscriptions for a specific config.
@@ -279,7 +280,8 @@ class Onetappy:
         Args:
             script_id (int): ID of script.
         """
-        pass
+        endpoint = f"/scripts/{script_id}/subscriptions"
+        return self._req("GET", endpoint)
 
     def create_script_sub(self, script_id:int, user_id:int):
         """Creates a new config subscription.
@@ -288,7 +290,11 @@ class Onetappy:
             script_id (int): ID of script.
             user_id (int): ID of the user to share the script with.
         """
-        pass
+        endpoint = f"/scripts/{script_id}/subscriptions"
+        d = {
+            "user_id": user_id
+        }
+        return self._req("POST", endpoint, data=d)
 
     def delete_script_sub(self, script_id:int, user_id:int):
         """Deletes a script subscription.
@@ -297,7 +303,11 @@ class Onetappy:
             script_id (int): ID of script.
             user_id (int): ID of the user to stop sharing the script with.
         """
-        pass
+        endpoint = f"/scripts/{script_id}/subscriptions"
+        d = {
+            "user_id": user_id
+        }
+        return self._req("DELETE", endpoint, data=d)
 # endregion
 
 # endregion
