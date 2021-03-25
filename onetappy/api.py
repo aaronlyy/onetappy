@@ -6,7 +6,7 @@
 import requests
 
 # TODO:
-# add all endpoint methods
+# add response container
 # add custom exceptions
 
 # region base class
@@ -18,7 +18,8 @@ class Onetappy:
         self._headers = {
             "X-Api-Id": api_id,
             "X-Api-Secret": api_secret,
-            "X-Api-Key": api_key
+            "X-Api-Key": api_key,
+            "Content-Type": "application/x-www-form-urlencoded"
         }
 
         self._base_url = "https://api.onetap.com/cloud"
@@ -28,16 +29,16 @@ class Onetappy:
         url = f"{self._base_url}{endpoint}"
 
         if method == "GET":
-            return requests.get(url, headers=self._headers).json()
+            res = requests.get(url, headers=self._headers)
         elif method == "POST":
-            return requests.post(url, headers=self._headers, data=data).json()
+            res = requests.post(url, headers=self._headers, data=data)
         elif method == "DELETE":
             if data:
-                return requests.delete(url, headers=self._headers, data=data).json()
+                res = requests.delete(url, headers=self._headers, data=data)
             else:
-                return requests.delete(url, headers=self._headers).json()
-        else:
-            raise Exception
+                res = requests.delete(url, headers=self._headers)
+
+        return res.json()
 # endregion
 
 # region configs
